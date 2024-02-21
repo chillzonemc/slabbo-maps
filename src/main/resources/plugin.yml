@@ -1,0 +1,6 @@
+name: SlabboMaps
+version: '${version}'
+main: gg.mew.plugins.slabbomaps.SlabboMaps
+api-version: '1.20'
+depend:
+  - Slabbo
