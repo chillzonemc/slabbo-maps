@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'gg.mew.plugins'
-version = '1.0-SNAPSHOT'
+version = '0.1'
 
 repositories {
     mavenCentral()
@@ -41,15 +41,13 @@ shadowJar {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-
-//    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
-
     options.compilerArgs += ["-parameters"]
-
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release.set(targetJavaVersion)
     }
 }
+
+tasks.build.dependsOn tasks.shadowJar
 
 processResources {
     def props = [version: version]
