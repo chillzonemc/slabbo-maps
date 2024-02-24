@@ -4,23 +4,23 @@ import gg.mew.plugins.slabbomaps.shop.Shop;
 import lombok.Getter;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 @Getter
-public enum OrderBy implements Comparator<Shop> {
+public enum OrderBy implements Comparator<Shop>, Predicate<Shop> {
 
-    BuyPriceAscending(Comparator.comparingDouble(Shop::getBuyPrice)),
-    BuyPriceDescending(Comparator.comparingDouble(Shop::getBuyPrice).reversed()),
+    BuyAscending(Comparator.comparingDouble(Shop::getBuyPrice), it -> it.getBuyPrice() != -1),
+    BuyDescending(Comparator.comparingDouble(Shop::getBuyPrice).reversed(), it -> it.getBuyPrice() != -1),
 
-    SellPriceAscending(Comparator.comparingDouble(Shop::getSellPrice)),
-    SellPriceDescending(Comparator.comparingDouble(Shop::getSellPrice).reversed()),
-
-    QuantityAscending(Comparator.comparingDouble(Shop::getQuantity)),
-    QuantityDescending(Comparator.comparingDouble(Shop::getQuantity).reversed());
+    SellAscending(Comparator.comparingDouble(Shop::getSellPrice), it -> it.getSellPrice() != -1),
+    SellDescending(Comparator.comparingDouble(Shop::getSellPrice).reversed(), it -> it.getSellPrice() != -1);
 
     private final Comparator<Shop> comparator;
+    private final Predicate<Shop> filter;
 
-    OrderBy(final Comparator<Shop> comparator) {
+    OrderBy(final Comparator<Shop> comparator, final Predicate<Shop> filter) {
         this.comparator = comparator;
+        this.filter = filter;
     }
 
     @Override
@@ -28,4 +28,8 @@ public enum OrderBy implements Comparator<Shop> {
         return this.comparator.compare(o1, o2);
     }
 
+    @Override
+    public boolean test(final Shop shop) {
+        return this.filter.test(shop);
+    }
 }

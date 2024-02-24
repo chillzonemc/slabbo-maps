@@ -2,8 +2,8 @@ package gg.mew.plugins.slabbomaps.shop;
 
 import gg.mew.plugins.slabbomaps.SlabboMaps;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-
 import java.io.File;
 import java.util.*;
 
@@ -18,9 +18,8 @@ public final class ShopRepository {
         this.plugin = plugin;
     }
 
-
     public void init() {
-        this.load();
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this.plugin, this::load, 0, 20 * 60);
     }
 
     public void load() {
