@@ -53,7 +53,7 @@ public final class SlabboMapsCommand extends BaseCommand {
     @Syntax("<item>")
     @CommandPermission("slabbomaps.locate.shop")
     @CommandCompletion("@items")
-    public void onLocateItem(final Player player, final ItemStack itemStack, @Default("BuyPriceAscending") final OrderBy orderBy) {
+    public void onLocateItem(final Player player, final ItemStack itemStack, @Default("BuyAscending") final OrderBy orderBy) {
         final var shop = this.plugin.getShopRepository()
                 .getShops()
                 .stream()
