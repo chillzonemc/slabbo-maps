@@ -16,6 +16,7 @@ public final class Shop {
     private ItemStack item;
     private UUID ownerId;
     private int stock;
+    private int quantity;
 
     @SneakyThrows
     public static Shop fromObject(final Object obj) {
@@ -31,6 +32,7 @@ public final class Shop {
         shop.item = (ItemStack) shopClass.getDeclaredField("item").get(obj);
         shop.ownerId = (UUID) shopClass.getDeclaredField("ownerId").get(obj);
         shop.stock = shopClass.getDeclaredField("stock").getInt(obj);
+        shop.quantity = shopClass.getDeclaredField("quantity").getInt(obj);
 
         return shop;
     }

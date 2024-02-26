@@ -9,11 +9,11 @@ import java.util.function.Predicate;
 @Getter
 public enum OrderBy implements Comparator<Shop>, Predicate<Shop> {
 
-    BuyAscending(Comparator.comparingDouble(Shop::getBuyPrice), it -> it.getBuyPrice() != -1),
-    BuyDescending(Comparator.comparingDouble(Shop::getBuyPrice).reversed(), it -> it.getBuyPrice() != -1),
+    BuyAscending(Comparator.comparingDouble(it -> it.getBuyPrice() / it.getQuantity()), it -> it.getBuyPrice() != -1 && it.getQuantity() > 0),
+    BuyDescending(Comparator.<Shop>comparingDouble(it -> it.getBuyPrice() / it.getQuantity()).reversed(), it -> it.getBuyPrice() != -1 && it.getQuantity() > 0),
 
-    SellAscending(Comparator.comparingDouble(Shop::getSellPrice), it -> it.getSellPrice() != -1),
-    SellDescending(Comparator.comparingDouble(Shop::getSellPrice).reversed(), it -> it.getSellPrice() != -1);
+    SellAscending(Comparator.comparingDouble(it -> it.getSellPrice() / it.getQuantity()), it -> it.getSellPrice() != -1 && it.getQuantity() > 0),
+    SellDescending(Comparator.<Shop>comparingDouble(it -> it.getSellPrice() / it.getQuantity()).reversed(), it -> it.getSellPrice() != -1 && it.getQuantity() > 0);
 
     private final Comparator<Shop> comparator;
     private final Predicate<Shop> filter;
