@@ -4,13 +4,14 @@ plugins {
 }
 
 group = 'gg.mew.plugins'
-version = '0.1'
+version = '0.2'
 
 repositories {
     mavenCentral()
 
-    maven {url = "https://repo.papermc.io/repository/maven-public/" }
+    maven { url = "https://repo.papermc.io/repository/maven-public/" }
     maven { url = "https://repo.aikar.co/content/groups/aikar/" }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -22,6 +23,8 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    compileOnly "com.github.angeschossen:LandsAPI:6.44.10"
 }
 
 def targetJavaVersion = 17

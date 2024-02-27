@@ -7,7 +7,6 @@ import gg.mew.plugins.slabbomaps.shop.Shop;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
@@ -68,6 +67,7 @@ public final class SlabboMapsCommand extends BaseCommand {
                 .stream()
                 .filter(it -> it.getItem().isSimilar(itemStack))
                 .filter(orderBy)
+                .filter(this.plugin::isInShoppingDistrict)
                 .min(orderBy);
 
         if (shop.isPresent()) {

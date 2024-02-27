@@ -13,3 +13,5 @@ permissions:
     default: true
 depend:
   - Slabbo
+softdepend:
+  - Lands
