@@ -67,7 +67,6 @@ public final class SlabboMapsCommand extends BaseCommand {
                 .getShops()
                 .stream()
                 .filter(it -> it.getItem().isSimilar(itemStack))
-                .filter(it -> it.getStock() > 0)
                 .filter(orderBy)
                 .min(orderBy);
 
